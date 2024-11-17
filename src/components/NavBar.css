@@ -1,0 +1,57 @@
+/* idk if this is okay https: //colorhunt.co/palette/a6aebfc5d3e8d0e8c5fff8de */
+
+.navbar {
+    background-color: rgb(197, 211, 232);
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-logo {
+    font-weight: italic;
+    color: black;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu li a {
+    color: black;
+    text-decoration: none;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+    background-color: rgb(166, 174, 191);
+}
+
+.navbar-menu li a.active {
+    text-decoration-color: black;
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
