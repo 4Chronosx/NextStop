@@ -1,3 +1,37 @@
+:root {
+  --palette-color1: #001c30;
+  --palette-color2: #176b87;
+  --palette-color3: #64ccc5;
+  --palette-color4: #dafffb;
+  --palette-color5: #4e6e81;
+  --color1: white;
+}
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  font-size: 16px;
+}
 
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa; /* Bootstrap's default light gray */
+  color: #212529; /* Bootstrap's default text color */
+}
