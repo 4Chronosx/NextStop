@@ -1,0 +1,24 @@
+.carousel-control-prev-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg)
+    brightness(0.5);
+}
+
+/* Set the color of the next control icon */
+.carousel-control-next-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg)
+    brightness(0.9);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 10% !important; /* Narrower control button area */
+}
+
+.carousel-control-prev {
+  left: -3rem !important; /* Move left control further out */
+}
+
+.carousel-control-next {
+  right: -3rem !important; /* Move right control further out */
+}
+
