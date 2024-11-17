@@ -47,7 +47,7 @@ const Carousel = () => {
         <div className="carousel-inner">
           {/* Render carousel items */}
           <div className="carousel-item active">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center align-items-center">
               {isMobile
                 ? carouselItems.slice(0, 1).map((item, index) => (
                     <div
@@ -62,7 +62,7 @@ const Carousel = () => {
                     </div>
                   ))
                 : carouselItems.slice(0, 3).map((item, index) => (
-                    <div className="col-12 col-md-4" key={index}>
+                    <div className="col-12 col-md-4  d-flex justify-content-center" key={index}>
                       <Card
                         title={item.title}
                         content={item.content}
@@ -74,7 +74,7 @@ const Carousel = () => {
           </div>
 
           <div className="carousel-item">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center align-items-center">
               {isMobile
                 ? carouselItems.slice(1, 2).map((item, index) => (
                     <div
@@ -89,7 +89,7 @@ const Carousel = () => {
                     </div>
                   ))
                 : carouselItems.slice(3, 6).map((item, index) => (
-                    <div className="col-12 col-md-4" key={index}>
+                    <div className="col-12 col-md-4  d-flex justify-content-center" key={index}>
                       <Card
                         title={item.title}
                         content={item.content}
