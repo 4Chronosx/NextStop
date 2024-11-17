@@ -1,0 +1,26 @@
+.bg-img {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url("src/assets/map.jpg");
+  background-size: cover; /* Ensures the image covers the entire header area */
+  background-position: center center; /* Centers the image within the header */
+  background-repeat: no-repeat; /* Prevents image from repeating */
+  padding-top: 6rem; /* Adjust padding as needed to create spacing */
+  padding-bottom: 6rem;
+}
+
+.custom-button1 {
+    background-color: #00adef !important;
+    color: white !important;
+}
+
+.custom-button1:hover {
+    background-color: #0497d1 !important;
+    color: white !important;
+}
+
+.custom-card {
+    height: 20rem;
+    width: 20rem;
+    background-color: #00adef;
+    border: 1px solid black; 
+}
