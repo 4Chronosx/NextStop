@@ -1,0 +1,15 @@
+
+
+.chat-container {
+    position: relative;
+    height: 450px;
+    width: 450px;
+}
+
+@media only screen and (max-width: 768px) {
+    .chat-container {
+        position: relative;
+        height: 450px;
+        width: 400px;
+    }
+}
