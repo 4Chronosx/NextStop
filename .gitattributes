@@ -1,3 +1,6 @@
+# Force text files to use LF
 * text=auto
 *.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
 *.json text eol=lf

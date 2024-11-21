@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
+      className="navbar sticky-top navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
       data-bs-theme="dark"
     >
       <div className="container-fluid">
@@ -40,7 +40,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">
+              <Link className="nav-link" to="/create-with-ai">
                 Create with AI
               </Link>
             </li>
