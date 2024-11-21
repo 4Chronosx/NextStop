@@ -1,4 +1,4 @@
-import Card from "./card"; // Import your Card component
+import Card from "./Card"; // Import your Card component
 import "./Carousel.css";
 import { useState, useEffect } from "react";
 

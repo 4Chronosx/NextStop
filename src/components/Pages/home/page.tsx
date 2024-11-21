@@ -1,6 +1,6 @@
-import Navbar from "../ui/Navbar";
+import Navbar from "../../ui/Navbar";
 import "../home/page.css";
-import Carousel from '../ui/Carousel';
+import Carousel from '../../ui/Carousel';
 
  
 
