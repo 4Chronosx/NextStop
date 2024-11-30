@@ -1,6 +1,98 @@
-
-.map-container {
+/* Wrapper to handle spacing between elements */
+.content-wrapper {
+    padding: 20px;
     height: 100%;
+}
+
+/* Grid layout to place the chatbox and map */
+.layout-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* By default, make it a single column */
+    gap: 20px;
+    /* Add space between the chatbox and map */
+}
+
+/* Make the map and chatbox containers take full width */
+.chat-container,
+.map-container {
     width: 100%;
-    padding: 10px;
+}
+
+/* Add height to map-container */
+.map-container {
+    height: 300px;
+    /* Set a height for small screens */
+    min-height: 300px;
+    /* Ensure it has space to render */
+}
+
+/* Media query for larger screens (tablet and above) */
+@media (min-width: 768px) {
+    .layout-container {
+        grid-template-columns: 1fr 1fr;
+        /* Side-by-side layout on large screens */
+        gap: 20px;
+        /* Space between the chatbox and map */
+    }
+
+    /* Adjust the map height for larger screens */
+    .map-container {
+        height: 500px;
+        /* Adjust the height for larger screens */
+    }
+}
+
+
+@media (max-width: 767px) {
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        /* Align buttons horizontally */
+        justify-content: center;
+        gap: 10px;
+        /* Add some space between buttons */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .map-container {
+        height: 400px;
+        /* Keep the map height smaller for mobile screens */
+    }
+
+    /* Make buttons smaller on mobile */
+    .map-container button {
+        padding: 8px 13px; /* Smaller padding */
+        font-size: 10px; /* Smaller font size */
+        max-width: 150px; /* Optional: Limit the width of the buttons */
+    }
+}
+
+/* Button container positioned below the map */
+.button-container {
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: right;
+}
+
+/* Styling for individual buttons */
+.map-container button {
+    padding: 12px 25px;
+    font-size: 13px;
+    background-color: #F7D47A;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-grow: 1;
+    /* Make buttons grow to fill available space */
+    max-width: 200px;
+    /* Optional: Limit the width of the buttons */
+}
+
+.map-container button:hover {
+    background-color: #FBBC05;
 }
