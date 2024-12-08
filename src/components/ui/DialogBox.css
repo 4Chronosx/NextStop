@@ -1,0 +1,16 @@
+.dialogView-button {
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0 0 0.15rem;
+}
+
+.maps-container {
+	width: 80%;
+	height: 30rem;
+	background-color: grey;
+	margin: 2rem auto;
+	text-align: center;
+}
