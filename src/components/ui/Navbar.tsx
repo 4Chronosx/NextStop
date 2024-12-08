@@ -44,11 +44,6 @@ const Navbar = () => {
                 Create with AI
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="#">
-                Map View
-              </Link>
-            </li>
           </ul>
           <form className="d-flex" role="search">
             <input
