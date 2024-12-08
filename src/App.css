@@ -34,4 +34,6 @@ body {
   line-height: 1.6;
   background-color: #f8f9fa; /* Bootstrap's default light gray */
   color: #212529; /* Bootstrap's default text color */
+
+  overflow-x: hidden; 
 }
