@@ -1,15 +1,100 @@
-
-
 .chat-container {
-    position: relative;
-    height: 450px;
-    width: 450px;
+  position: relative; /* Create a context for sticky positioning */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the container spans the full height */
+  overflow: hidden;
 }
 
-@media only screen and (max-width: 768px) {
-    .chat-container {
-        position: relative;
-        height: 450px;
-        width: 400px;
-    }
-}
+.create-button, .view-itinerary-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 3rem;
+    border-radius: 2rem;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+  }
+  
+  .create-button:after, .view-itinerary-button:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0cf;
+    border-radius: 2rem;
+    z-index: -2;
+  }
+  
+  .create-button:before, .view-itinerary-button:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #008fb3;
+    transition: all 0.3s;
+    border-radius: 2rem;
+    z-index: -1;
+  }
+  
+  .create-button:hover, .view-itinerary-button:hover {
+    color: #fff;
+  }
+  
+  .create-button:hover:before, .view-itinerary-button:hover:before {
+    width: 100%;
+  }
+  
+  /* Disabled Button */
+  .create-button:disabled, .view-itinerary-button:disabled {
+    background-color: #cccccc !important; /* Disabled background */
+    color: #cccccc; /* Disabled text color */
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none; /* Remove any shadow effect */
+    transition: none; /* Disable transitions */
+  }
+  
+  /* Style pseudo-elements when button is disabled */
+  .create-button:disabled:after, .view-itinerary-button:disabled:after {
+    background-color: #666666; /* Disabled background for after */
+  }
+  
+  .create-button:disabled:before , .view-itinerary-button:disabled:before {
+    background-color: #666666; /* Disabled background for before */
+  }
+  
+  /* Prevent hover effect when disabled */
+  .create-button:disabled:hover:before, .view-itinerary-button:disabled:hover:before {
+    width: 0%; /* Reset to initial state */
+  }
+  
+  .create-button:disabled:hover, .view-itinerary-button:disabled:hover {
+    background-color: #cccccc; /* Keep disabled background */
+    transition: none;
+  }
+
+  .chatbox-button-container {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    
+
+  }
+  
+  
+
+
