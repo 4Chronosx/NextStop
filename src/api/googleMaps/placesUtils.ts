@@ -1,19 +1,33 @@
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 
-// Get latitude and longitude from an address
-export const getCoordinatesFromAddress = async (address: string) => {
+export const getCoordinatesFromAddress = async (address: string): Promise<{ lat: number; lng: number }> => {
+  if (!window.google || !window.google.maps) {
+    throw new Error("Google Maps JavaScript API not loaded.");
+  }
+
+  const geocoder = new window.google.maps.Geocoder();
   try {
-    const results = await getGeocode({ address });
-    if (results.length === 0) {
-      throw new Error("No geocode results found");
+    const results = await new Promise<google.maps.GeocoderResult[]>((resolve, reject) => {
+      geocoder.geocode({ address }, (results, status) => {
+        if (status === "OK" && results) {
+          resolve(results);
+        } else {
+          reject(`Geocoding failed: ${status}`);
+        }
+      });
+    });
+
+    const location = results[0]?.geometry?.location;
+    if (location) {
+      return { lat: location.lat(), lng: location.lng() };
+    } else {
+      throw new Error("No location found.");
     }
-    return getLatLng(results[0]); // Convert the first result to LatLng
   } catch (error) {
-    console.error("Error getting coordinates from address:", error);
+    console.error("Error during geocoding:", error);
     throw error;
   }
 };
-
 // Convert latitude and longitude to an address (reverse geocoding)
 export const getAddressFromCoordinates = async (latLng: google.maps.LatLngLiteral) => {
   try {
