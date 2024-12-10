@@ -13,12 +13,13 @@ import Map from "../google-maps/maps"; // Ensure Map is a React component
 import { getCoordinatesFromAddress } from "../../api/googleMaps/placesUtils"; // Import the utility for geocoding
 
 interface ActivityDetail {
-  "Activity Title": string;
-  "Activity Type": string;
-  Duration: string;
-  "Time slot": string;
-  "Budget for the Activity": string;
-  Location: string;
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
 }
 
 interface DayItinerary {
@@ -43,7 +44,7 @@ const extractLocations = async (data: DayItinerary) => {
 
   // Loop through each activity's location in the details array
   for (const activity of data.details) {
-    const location = activity.Location; // Extract the location from each activity
+    const location = activity.location; // Extract the location from each activity
 
     try {
       console.log(`Attempting to geocode: ${location}`); // Log the address being geocoded

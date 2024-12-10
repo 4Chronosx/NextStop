@@ -13,12 +13,13 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import CommuteIcon from '@mui/icons-material/Commute';
 
 interface ActivityDetail {
-  "Activity Title": string;
-  "Activity Type": string;
-  Duration: string;
-  "Time slot": string;
-  "Budget for the Activity": string;
-  Location: string;
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
 }
 
 interface DayItinerary {
@@ -66,33 +67,33 @@ const ActivityTimeline = ({ details, date }: DayItinerary) => {
             variant="body2"
             color="text.secondary"
           >
-            {activity["Time slot"]}
+            {activity.timeSlot}
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineConnector />
             <TimelineDot color={getDotColor(index)}>
-              {getIconForActivityType(activity["Activity Type"])}
+              {getIconForActivityType(activity.type)}
             </TimelineDot>
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent sx={{ py: '12px', px: 2 }}>
             <Typography variant="h6" component="span">
-              {activity["Activity Title"]}
+              {activity.title}
             </Typography>
             <Typography
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
-              {activity["Activity Type"]}, {activity.Duration}
+              {activity.type}, {activity.duration}
             </Typography>
             <Typography
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
-              Location: {activity.Location}
+              Location: {activity.location}
             </Typography>
             <Typography
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
-              Budget: {activity["Budget for the Activity"]}
+              Budget: {activity.budget}
             </Typography>
           </TimelineContent>
         </TimelineItem>

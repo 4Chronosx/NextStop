@@ -1,5 +1,4 @@
 import Navbar from "../../ui/Navbar";
-import Carousel from '../../ui/Carousel';
 
 const CreateItinerary = () => {
     return (

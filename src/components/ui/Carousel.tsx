@@ -4,12 +4,13 @@ import Card from "./Card"; // Import your Card component
 import "./Carousel.css";
 
 interface ActivityDetail {
-  "Activity Title": string;
-  "Activity Type": string;
-  Duration: string;
-  "Time slot": string;
-  "Budget for the Activity": string;
-  Location: string;
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
 }
 
 interface DayItinerary {
@@ -30,12 +31,13 @@ const defaultItinerary: Itinerary[] = [
         date: "Day 1",
         details: [
           {
-            "Activity Title": "Activity 1",
-            "Activity Type": "Type 1",
-            Duration: "2 hours",
-            "Time slot": "Morning",
-            "Budget for the Activity": "$100",
-            Location: "Location 1",
+            date: "Day 1",
+            title: "Activity 1",
+            type: "Type 1",
+            duration: "2 hours",
+            timeSlot: "Morning",
+            budget: "$100",
+            location: "Location 1",
           },
         ],
       },
