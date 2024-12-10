@@ -1,23 +1,56 @@
+import { useNavigate } from "react-router";
+import "./Card.css";
 
-interface Props {
-    img: string;
-    title: string;
-    content: string;
+interface ActivityDetail {
+  "Activity Title": string;
+  "Activity Type": string;
+  Duration: string;
+  "Time slot": string;
+  "Budget for the Activity": string;
+  Location: string;
 }
 
-const Card = ({img, title, content} : Props) => {
+interface DayItinerary {
+  date: string;
+  details: ActivityDetail[];
+}
+
+interface Itinerary {
+  title: string;
+  days: DayItinerary[];
+}
+
+interface ItineraryProps {
+  itinerary: Itinerary;
+}
+
+const Card = ({ itinerary }: ItineraryProps) => {
+  const navigate = useNavigate();
+  console.log(itinerary);
+
+  const handleView = () => {
+    navigate("/view-itinerary", {
+      state: { itinerary: itinerary }, // Pass the itinerary data as state
+    });
+  };
+
   return (
     <>
-      <div className="card m-3" style={{ width: "18rem"}}>
-        <img src={img} className="card-img-top" alt="..." />
+      <div className="card m-3">
+        {/*<img className="card-img-top" alt="Some picture" /> */}
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">
-            {content}
-          </p>
-          <a href="#" className="btn custom-button1">
-            view
-          </a>
+          <div className="card-title-content-container">
+            <h5 className="card-title">{itinerary.title}</h5>
+            <p className="card-text">
+              Date: {itinerary.days[0].date} to {" "}
+              {itinerary.days[itinerary.days.length - 1].date}
+            </p>
+          </div>
+          <div className="card-button-container">
+            <button onClick={handleView} className="btn custom-button1">
+              view
+            </button>
+          </div>
         </div>
       </div>
     </>
