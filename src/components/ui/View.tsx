@@ -1,6 +1,5 @@
 import DayCard from "./DayCard";
 import "./View.css";
-import { useNavigate } from "react-router";
 
 interface ActivityDetail {
   "Activity Title": string;
@@ -28,11 +27,6 @@ interface ItineraryProp {
 
 
 const View = ({ itinerary }: ItineraryProp) => {
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate('/');
-  }
-
   return (
     <>
       <div className="my-container">
@@ -47,9 +41,6 @@ const View = ({ itinerary }: ItineraryProp) => {
               </div>
             );
           })}
-        </div>
-        <div className="view-back-button-container">
-            <button onClick={handleBack} className="view-back-button">Go back Home</button>
         </div>
       </div>
     </>
