@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../ui/Navbar";
+
 import "./page.css"; 
 
 interface ActivityDetail {
@@ -134,6 +135,7 @@ const CreateItinerary: React.FC = () => {
   
     const confirmed = window.confirm(
       `Are you sure you want to delete the activity "${activity.title}"?`
+
     );
     if (!confirmed) return;
   

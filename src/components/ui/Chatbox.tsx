@@ -17,12 +17,13 @@ import { postUserData } from "../../api/hostOneApi";
 import { useNavigate } from "react-router";
 
 interface ActivityDetail {
-  "Activity Title": string;
-  "Activity Type": string;
-  Duration: string;
-  "Time slot": string;
-  "Budget for the Activity": string;
-  Location: string;
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
 }
 
 interface DayItinerary {
@@ -52,57 +53,63 @@ const Chatbox = () => {
         date: " ",
         details: [
           {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
           {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
           {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
         ],
       },
       {
         date: " ",
         details: [
-          {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+          { 
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
           {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
           {
-            "Activity Title": " ",
-            "Activity Type": " ",
-            Duration: " ",
-            "Time slot": " ",
-            "Budget for the Activity": " ",
-            Location: " ",
+            date: " ",
+            title: " ",
+            type: " ",
+            duration: " ",
+            timeSlot: " ",
+            budget: " ",
+            location: " ",
           },
         ],
       },
@@ -223,18 +230,19 @@ const Chatbox = () => {
     
       '\`\`\`json
       {
-        "title": " ",
-        "days": [
+        title: " ",
+        days: [
           {
-            "date": "mm-dd-yyyy",
-            "details": [
+            date: "mm-dd-yyyy",
+            details: [
               {
-                "Activity Title": " ",
-                "Activity Type": " ",
-                "Duration": " ",
-                "Time slot": " ",
-                "Budget for the Activity": " ",
-                "Location": " "
+                date: "mm-dd-yyyy",
+                title: " ",
+                type: " ",
+                duration: " ",
+                timeSlot: " ",
+                budget: " ",
+                location: " "
               },
               
             ]
@@ -260,7 +268,7 @@ const Chatbox = () => {
          - Organize activities within a day to minimize travel time.
          - Consider logical transitions between activities.
     
-      4. **Detailed Time Slots and Durations**:
+      4. **Detailed Time Slots and durations**:
          - Assign accurate time slots for each activity.
          - Ensure the entire day is accounted for, factoring in **travel time** between locations.
     
