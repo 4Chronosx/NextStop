@@ -6,7 +6,6 @@
 
 .map-controls-container {
     position: relative;
-    /* Keeps it below the map */
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     /* Optional: semi-transparent background */
@@ -53,4 +52,43 @@
 .map-travel-mode-selector,
 .map-route-details-box {
     margin-top: 10px;
+    width: 90%;
+    /* Limit width to 90% of the parent container */
+    max-width: 600px;
+    /* Max width for a clean look */
+    margin: 10px auto;
+    /* Center the content */
+    background-color: #fff;
+    /* White background */
+    border: 1px solid #ddd;
+    /* Light border for separation */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Padding for inner spacing */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.map-route-details-box h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    /* Space between title and list */
+}
+
+.map-route-details-box ul {
+    list-style-type: none;
+    /* Remove bullet points */
+    padding-left: 0;
+}
+
+.map-route-details-box li {
+    margin-bottom: 10px;
+    /* Add space between list items */
+}
+
+.map-route-details-box p {
+    margin: 10px 0 0;
+    font-size: 1rem;
 }

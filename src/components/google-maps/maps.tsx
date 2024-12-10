@@ -36,7 +36,10 @@ const Map = ({ locations }: { locations: Location[] }) => {
     return uniquePlaces;
   };
 
-  const places = removeDuplicateLocations(locations);
+  const places = useMemo(
+    () => removeDuplicateLocations(locations),
+    [locations]
+  );
 
   const [directions, setDirections] =
     useState<google.maps.DirectionsResult | null>(null);
@@ -46,18 +49,19 @@ const Map = ({ locations }: { locations: Location[] }) => {
     google.maps.TravelMode.DRIVING
   );
 
+  const waypoints = useMemo(
+    () =>
+      places.slice(1, places.length - 1).map((place) => ({
+        location: new google.maps.LatLng(place.lat, place.lng),
+        stopover: true,
+      })),
+    [places]
+  );
+
   const fetchRoute = useCallback(() => {
     if (places.length < 2 || !showRoute) return; // Prevent route fetching if showRoute is false
     console.log("Fetching route...");
     const directionsService = new google.maps.DirectionsService();
-
-    const waypoints = places.slice(1, places.length - 1).map((place) => ({
-      location: new google.maps.LatLng(place.lat, place.lng),
-      stopover: true,
-    }));
-
-    // Log waypoints to debug
-    console.log("Waypoints:", waypoints);
 
     directionsService.route(
       {
@@ -71,9 +75,6 @@ const Map = ({ locations }: { locations: Location[] }) => {
       },
       (result, status) => {
         console.log("Route result status:", status);
-        console.log("Origin:", places[0]);
-        console.log("Destination:", places[places.length - 1]);
-        console.log("Waypoints:", places.slice(1, places.length - 1));
 
         if (status === "OK") {
           setDirections(result);
@@ -85,7 +86,7 @@ const Map = ({ locations }: { locations: Location[] }) => {
         }
       }
     );
-  }, [places, travelMode, showRoute]);
+  }, [places, travelMode, waypoints, showRoute]);
 
   const onLoad = useCallback(
     (map: google.maps.Map) => {
@@ -124,14 +125,7 @@ const Map = ({ locations }: { locations: Location[] }) => {
 
   const handleRouteToggle = () => {
     if (places.length < 2) return;
-    setShowRoute((prev) => {
-      const newShowRoute = !prev;
-      console.log("Toggling showRoute:", newShowRoute); // Add this line to check the state
-      if (!newShowRoute) {
-        setDirections(null); // Clear directions when hiding the route
-      }
-      return newShowRoute;
-    });
+    setShowRoute((prev) => !prev);
   };
 
   const handleDetailsToggle = () => {
@@ -147,10 +141,18 @@ const Map = ({ locations }: { locations: Location[] }) => {
 
   const routeDetails = directions ? formatRouteDetails(directions) : null;
 
+  const handleMarkerClick = (lat: number, lng: number) => {
+    if (mapRef.current) {
+      const position = new google.maps.LatLng(lat, lng);
+      mapRef.current.panTo(position); // Move the map to the marker position
+      mapRef.current.setZoom(15); // Adjust zoom level to 15 when clicking a marker
+    }
+  };
+
   return (
     <div className="map-container" style={{ height: "100%", width: "100%" }}>
       <GoogleMap
-        key={showRoute ? "showRoute" : "hideRoute"} // Key changes based on showRoute
+        key="map" // Stable key
         zoom={10}
         center={center}
         mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -160,13 +162,15 @@ const Map = ({ locations }: { locations: Location[] }) => {
         {!showRoute &&
           places.length > 0 &&
           places.map((place, index) => (
-            <MarkerF key={index} position={place} />
+            <MarkerF
+              key={index}
+              position={place}
+              onClick={() => handleMarkerClick(place.lat, place.lng)}
+            />
           ))}
 
         {showRoute && directions && (
-          <>
-            <DirectionsRenderer directions={directions} />
-          </>
+          <DirectionsRenderer directions={directions} />
         )}
       </GoogleMap>
 
@@ -197,28 +201,27 @@ const Map = ({ locations }: { locations: Location[] }) => {
             <option value={google.maps.TravelMode.BICYCLING}>Bicycling</option>
           </select>
         </div>
-
-        {showDetails && routeDetails && (
-          <div className="map-route-details-box">
-            <h3>Route Details</h3>
-            <ul>
-              {routeDetails.legs.map((leg, index) => (
-                <li key={index}>
-                  <strong>{leg.stop}:</strong> {leg.distance} ({leg.duration})
-                </li>
-              ))}
-            </ul>
-            <p>
-              <strong>Total Distance:</strong> {routeDetails.totalDistance}
-            </p>
-            <p>
-              <strong>Total Duration:</strong> {routeDetails.totalDuration}
-            </p>
-          </div>
-        )}
       </div>
+
+      {showDetails && routeDetails && (
+        <div className="map-route-details-box">
+          <h3>Route Details</h3>
+          <ul>
+            {routeDetails.legs.map((leg, index) => (
+              <li key={index}>
+                <strong>{leg.stop}:</strong> {leg.distance} ({leg.duration})
+              </li>
+            ))}
+          </ul>
+          <p>
+            <strong>Total Distance:</strong> {routeDetails.totalDistance}
+          </p>
+          <p>
+            <strong>Total Duration:</strong> {routeDetails.totalDuration}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
-
 export default Map;
