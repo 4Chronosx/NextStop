@@ -1,20 +1,28 @@
 .custom-button1 {
-    background-color: #00adef !important;
-    color: white !important;
+  background-color: #00adef !important;
+  color: white !important;
 }
 
 .custom-button1:hover {
-    background-color: #0497d1 !important;
-    color: white !important;
+  background-color: #0497d1 !important;
+  color: white !important;
 }
 
 
 .card {
-    width: 100% !important;  /* Ensure the card takes up full width */
-  }
-  
-  .card-img-top {
-    width: 100% !important;
-    height: auto;
-  }
-  
+width: 20rem !important;
+height: 10rem !important;
+}
+
+.card-img-top {
+  width: 100% !important;
+  height: auto;
+}
+
+
+
+.card-body {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
