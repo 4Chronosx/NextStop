@@ -10,20 +10,11 @@
 
 
 .card {
-  width: 20rem !important;
-  height: 10rem !important;
+    width: 100% !important;  /* Ensure the card takes up full width */
   }
   
   .card-img-top {
     width: 100% !important;
     height: auto;
   }
-
-
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
   
