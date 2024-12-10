@@ -1,132 +1,108 @@
+import { useState, useEffect } from "react";
+import { openDB } from "idb";
 import Card from "./Card"; // Import your Card component
 import "./Carousel.css";
-import { useState, useEffect } from "react";
+
+interface ActivityDetail {
+  "Activity Title": string;
+  "Activity Type": string;
+  Duration: string;
+  "Time slot": string;
+  "Budget for the Activity": string;
+  Location: string;
+}
+
+interface DayItinerary {
+  date: string;
+  details: ActivityDetail[];
+}
+
+interface Itinerary {
+  title: string;
+  days: DayItinerary[];
+}
+
+const defaultItinerary: Itinerary[] = [
+  {
+    title: "myItinerary",
+    days: [
+      {
+        date: "Day 1",
+        details: [
+          {
+            "Activity Title": "Activity 1",
+            "Activity Type": "Type 1",
+            Duration: "2 hours",
+            "Time slot": "Morning",
+            "Budget for the Activity": "$100",
+            Location: "Location 1",
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const Carousel = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [data, setData] = useState<Itinerary[]>(defaultItinerary);
 
-  // Update the state when the window is resized
+  const chunkData = (data: Itinerary[]) => {
+    const chunks = [];
+    for (let i = 0; i < data.length; i += 3) {
+      chunks.push(data.slice(i, i + 3));
+    }
+    return chunks;
+  };
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setIsMobile(true); // If width is <= 768px, set isMobile to true
-      } else {
-        setIsMobile(false); // Else, set isMobile to false
+    const initDB = async () => {
+      const db = await openDB("MyDatabase", 6);
+      const count = await db.count("data");
+      if (count > 0) {
+        const allData = await db.getAll("data");
+        setData(allData); // Ensure consistent display order
       }
     };
 
-    // Add event listener for resizing the window
-    window.addEventListener("resize", handleResize);
-
-    // Run the function on component mount
-    handleResize();
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    initDB();
   }, []);
 
-  let carouselItems = [];
-  for (let i = 0; i < 6; i++) {
-    carouselItems.push({
-      title: "Card Title",
-      img: "src/assets/paris.jpg",
-      content:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    });
-  }
+  const chunkedData = chunkData(data);
 
   return (
-    <div className="container" style={{ maxWidth: "80%" }}>
-      <div
-        id="carouselExample"
-        className="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-          {/* Render carousel items */}
-          <div className="carousel-item active">
-            <div className="row justify-content-center align-items-center">
-              {isMobile
-                ? carouselItems.slice(0, 1).map((item, index) => (
-                    <div
-                      className="col-12 d-flex justify-content-center"
-                      key={index}
-                    >
-                      <Card
-                        title={item.title}
-                        content={item.content}
-                        img={item.img}
-                      />
-                    </div>
-                  ))
-                : carouselItems.slice(0, 3).map((item, index) => (
-                    <div className="col-12 col-md-4  d-flex justify-content-center" key={index}>
-                      <Card
-                        title={item.title}
-                        content={item.content}
-                        img={item.img}
-                      />
-                    </div>
-                  ))}
-            </div>
+    <div id="carouselExampleFade" className="carousel slide carousel-fade">
+      <div className="carousel-inner">
+        {chunkedData.map((chunk, index) => (
+          <div
+            className={`carousel-item ${index === 0 ? "active" : ""}`}
+            key={`slide-${index}`}
+          >
+            {chunk.map((itinerary, idx) => (
+              <div key={`card-${index}-${idx}`} className="mx-2">
+                <Card itinerary={itinerary} />
+              </div>
+            ))}
           </div>
-
-          <div className="carousel-item">
-            <div className="row justify-content-center align-items-center">
-              {isMobile
-                ? carouselItems.slice(1, 2).map((item, index) => (
-                    <div
-                      className="col-12 d-flex justify-content-center"
-                      key={index}
-                    >
-                      <Card
-                        title={item.title}
-                        content={item.content}
-                        img={item.img}
-                      />
-                    </div>
-                  ))
-                : carouselItems.slice(3, 6).map((item, index) => (
-                    <div className="col-12 col-md-4  d-flex justify-content-center" key={index}>
-                      <Card
-                        title={item.title}
-                        content={item.content}
-                        img={item.img}
-                      />
-                    </div>
-                  ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Carousel Controls */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+        ))}
       </div>
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
     </div>
   );
 };
