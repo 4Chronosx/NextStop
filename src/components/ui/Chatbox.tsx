@@ -136,6 +136,7 @@ const Chatbox = () => {
       });
       console.log("Database initialized:", db.objectStoreNames);
     };
+    
 
     initDB();
   }, []);
@@ -151,7 +152,7 @@ const Chatbox = () => {
 
   const handleView = () => {
     navigate("/view-itinerary", {
-      state: { itinerary: data }, // Pass the itinerary data as state
+      state: { itinerary: data } // Pass the itinerary data as state
     });
   };
 
@@ -292,8 +293,10 @@ const Chatbox = () => {
         *"Please complete all the required questions to generate a full itinerary."*
       
       - If there are gaps in activities or missing details, automatically fill them with relevant suggestions based on the user's preferences and context.
-      `,
+      `
     };
+    
+    
 
     const apiRequestBody = {
       model: "gpt-4o-mini",
@@ -395,23 +398,24 @@ const Chatbox = () => {
             <MessageInput placeholder="Type message here" onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
-
+        
         <div className="chatbox-button-container">
-          <button
-            className="create-button"
-            disabled={isCreateDisabled}
-            onClick={handleSave}
-          >
-            Create
-          </button>
-          <button
-            className="view-itinerary-button"
-            disabled={isViewDisabled}
-            onClick={handleView}
-          >
-            View Itinerary
-          </button>
-        </div>
+        <button
+          className="create-button"
+          disabled={isCreateDisabled}
+          onClick={handleSave}
+        >
+          Create
+        </button>
+        <button
+          className="view-itinerary-button"
+          disabled={isViewDisabled}
+          onClick={handleView}
+        >
+          View Itinerary
+        </button>
+        </div> 
+        
       </div>
     </>
   );
