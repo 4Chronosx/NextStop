@@ -1,0 +1,41 @@
+html, body {
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+.my-container {
+    background-color: inherit;
+    min-width: 100vw !important;
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.view-header-container {
+  text-align: center;
+}
+
+.view-dayCard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusts the number of cards per row */
+  gap: 1rem; /* Uniform gap for both horizontal and vertical spacing */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

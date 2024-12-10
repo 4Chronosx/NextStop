@@ -1,0 +1,94 @@
+.map-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.map-controls-container {
+    position: relative;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Optional: semi-transparent background */
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    /* Add some space between the map and the controls */
+}
+
+.map-button-container {
+    margin-bottom: 10px;
+}
+
+/* Style for the buttons */
+.map-route-button,
+.map-details-button {
+    background-color: #0cf;
+    /* Set button background color to #0cf */
+    color: white;
+    /* White text */
+    padding: 10px 20px;
+    /* Add padding to make the button larger */
+    border: none;
+    /* Remove default border */
+    border-radius: 30px;
+    /* Make buttons rounder */
+    font-size: 16px;
+    /* Increase font size */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: all 0.3s ease;
+    /* Smooth transition on hover */
+    width: auto;
+}
+
+.map-route-button:hover,
+.map-details-button:hover {
+    background-color: #09b;
+    /* Darker shade of cyan for hover effect */
+    transform: scale(1.05);
+    /* Slightly increase button size on hover */
+}
+
+.map-travel-mode-selector,
+.map-route-details-box {
+    margin-top: 10px;
+    width: 90%;
+    /* Limit width to 90% of the parent container */
+    max-width: 600px;
+    /* Max width for a clean look */
+    margin: 10px auto;
+    /* Center the content */
+    background-color: #fff;
+    /* White background */
+    border: 1px solid #ddd;
+    /* Light border for separation */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Padding for inner spacing */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.map-route-details-box h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    /* Space between title and list */
+}
+
+.map-route-details-box ul {
+    list-style-type: none;
+    /* Remove bullet points */
+    padding-left: 0;
+}
+
+.map-route-details-box li {
+    margin-bottom: 10px;
+    /* Add space between list items */
+}
+
+.map-route-details-box p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+}
