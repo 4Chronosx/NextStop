@@ -49,6 +49,7 @@ const Chatbox = () => {
     title: "myItinerary",
     days: [
       {
+        date: " ",
         details: [
           {
             "Activity Title": " ",
@@ -77,6 +78,7 @@ const Chatbox = () => {
         ],
       },
       {
+        date: " ",
         details: [
           {
             "Activity Title": " ",
@@ -126,7 +128,7 @@ const Chatbox = () => {
   useEffect(() => {
     // Initialize IndexedDB on component mount
     const initDB = async () => {
-      const db = await openDB("MyDatabase", 1, {
+      const db = await openDB("MyDatabase", 6, {
         upgrade(db) {
           // Create an object store for "data" with auto-incrementing keys
           db.createObjectStore("data", { autoIncrement: true });
@@ -140,7 +142,7 @@ const Chatbox = () => {
 
   const handleSave = async () => {
     setisCreateDisabled(false);
-    const db = await openDB("MyDatabase", 1);
+    const db = await openDB("MyDatabase", 6);
     await db.add("data", data);
     getDB();
     setisCreateDisabled(true);
@@ -154,7 +156,7 @@ const Chatbox = () => {
   };
 
   const getDB = async () => {
-    const db = await openDB("MyDatabase", 1);
+    const db = await openDB("MyDatabase", 6);
 
     // Fetch all data from the object store
     const allData = await db.getAll("data");
@@ -203,7 +205,7 @@ const Chatbox = () => {
       - **Ask the following questions in order, one at a time**:
         1. "Where do you plan to have your trip?"
         2. "What is your budget for this trip?"
-        3. "What's the duration of your trip? [mm-dd-yyyy to mm-dd-yyyy?"
+        3. "What's the duration of your trip? [Type your starting and ending date]"
         4. "What time do you start and end your day?"
         5. "What type of activities are you interested in? (e.g., sightseeing, shopping, outdoor adventures)"
         6. "Are there any specific places you want to visit?"
@@ -215,10 +217,10 @@ const Chatbox = () => {
         *"I'm sorry, I can only assist with the trip planning questions provided. Let’s continue with your itinerary."*
     
       ### Itinerary Generation Instructions:
-      - Once all questions are answered, wait for the user to type **'create'**.
+      - Once all questions are answered, wait for the user to type **'generate'**.
       - Generate a **comprehensive, multi-day itinerary** in the following **JSON format**:
     
-      \`\`\`json
+      '\`\`\`json
       {
         "title": " ",
         "days": [
@@ -239,18 +241,20 @@ const Chatbox = () => {
           
         ]
       }
-      \`\`\`
+      \`\`\`'
     
       ### Requirements for Itinerary Completion:
       1. **Full Coverage for All Days**: 
          - Ensure each day has enough activities to span the entire time specified by the user (from start to end time).
-         - Ensure that the user follows proper date format. if not, ask them again. 
+         - Ensure that the user gives the starting and end date of the itinerary. With that, double check if the user has complete details 
+           such as month, date, and year. Afterwards, convert data to mm-dd-yyy format 
       
       2. **Specific and Relevant Activities**:
+         - Name the itinerary creatively 
          - Include activities tailored to the user’s preferences (e.g., sightseeing, dining, outdoor adventures).
          - Ensure the **Activity Titles** and **Locations** are specific and recognizable.
-         - Ensure that the Locations are very specific. You can't give unrecognizable or unsearchable locations. 
-    
+         - Activity types: Dining, Sightseeing, Leisure, Outdoor Adventure, Travel, Shopping
+
       3. **Grouping by Proximity**:
          - Organize activities within a day to minimize travel time.
          - Consider logical transitions between activities.
@@ -262,15 +266,22 @@ const Chatbox = () => {
       5. **Budget Considerations**:
          - Include estimated costs for each activity based on the user’s budget.
          - Ensure the total cost aligns with the user’s trip budget.
+         - Have the budget of each activity be in the currency of the place of the activity
+         - Ask user the currency of the budget they enter and convert to the itinerary destinartion place's currency accordingly
+    
     
       6. **Transportation Details**:
-         - Specify transportation modes (e.g., walking, taxi, public transit).
-         - Include travel times and costs in the itinerary.
+         - MAKE SURE TO INCLUDE TRANSPORTATION FROM ONE ACTIVITY TO ANOTHER (specifiy travel duration and costs, and transportation mode)
 
       7. **Completion**:
          - always complete the days of the itinerary and ensure that you generate the same number of days as requested by the user
          - do not suggest user to complete the strucuture or itinerary
          - avoid unnecessary comments inside the json
+         - never output the json structure
+
+      8. Specificity
+         - Ensure that ALL the activites in the itinerary have SPECIFIC addresses. DO NOT PUT VAGUE OR GENERAL ADDRESS
+         - Ensure that when recommending cafe or restaurant for dining, INCLUDE OR RECOMMEND A SPECIFIC RESTAURANT not just "You local Cafe, ---}
     
       ### Output Validation:
       - **Cross-check** the itinerary to ensure all days are populated.
