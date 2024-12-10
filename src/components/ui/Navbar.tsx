@@ -1,9 +1,8 @@
 import "./Navbar.css";
-import { Link, useLocation } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const location = useLocation(); // Get the current location
-
   return (
     <nav
       className="navbar sticky-top navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
@@ -12,7 +11,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img
-            src="src/assets/Logo.png"
+            src="src\assets\Logo.png"
             alt="Logo"
             style={{ height: "2rem" }}
           />
@@ -31,33 +30,17 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/" ? "active" : ""
-                }`}
-                aria-current="page"
-                to="/"
-              >
+              <Link className="nav-link active" aria-current="page" to="/">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/create-itinerary" ? "active" : ""
-                }`}
-                to="/create-itinerary"
-              >
+              <Link className="nav-link" to="/create-itinerary">
                 Create Itinerary
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/create-with-ai" ? "active" : ""
-                }`}
-                to="/create-with-ai"
-              >
+              <Link className="nav-link" to="/create-with-ai">
                 Create with AI
               </Link>
             </li>
