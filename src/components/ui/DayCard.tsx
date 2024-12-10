@@ -5,12 +5,13 @@ import DialogBox from "./DialogBox";
 
 
 interface ActivityDetail {
-  "Activity Title": string;
-  "Activity Type": string;
-  Duration: string;
-  "Time slot": string;
-  "Budget for the Activity": string;
-  Location: string;
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
 }
 
 interface DayItinerary {

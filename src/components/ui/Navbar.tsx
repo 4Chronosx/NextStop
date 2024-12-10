@@ -1,8 +1,93 @@
 import "./Navbar.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { openDB } from "idb";
+import { useEffect, useState } from "react";
+
+interface ActivityDetail {
+  date: string;
+  title: string;
+  type: string;
+  duration: string;
+  timeSlot: string;
+  budget: string;
+  location: string;
+}
+
+interface DayItinerary {
+  date: string;
+  details: ActivityDetail[];
+}
+
+interface Itinerary {
+  title: string;
+  days: DayItinerary[];
+}
+
+const defaultItinerary: Itinerary[] = [
+  {
+    title: "myItinerary",
+    days: [
+      {
+        date: "Day 1",
+        details: [
+          {
+            date: "Day 1",
+            title: "Activity 1",
+            type: "Type 1",
+            duration: "2 hours",
+            timeSlot: "Morning",
+            budget: "$100",
+            location: "Location 1",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+
 
 const Navbar = () => {
   const location = useLocation(); // Get the current location
+  const navigate = useNavigate();
+  const [data, setData] = useState<Itinerary[]>(defaultItinerary);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] =
+    useState<Itinerary[]>([]);
+
+  useEffect(() => {
+    const initDB = async () => {
+      const db = await openDB("MyDatabase", 6);
+      const count = await db.count("data");
+      if (count > 0) {
+        const allData = await db.getAll("data");
+        setData(allData); // Ensure consistent display order
+      }
+    };
+
+    initDB();
+  }, []);
+
+  const handleClickResult = (itinerary: Itinerary) => {
+    navigate("/view-itinerary", {
+      state: { itinerary: itinerary } // Pass the itinerary data as state
+    });
+  }
+
+  // Handle input changes and filter itineraries
+  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      const filteredResults = data.filter((itinerary) =>
+        itinerary.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+    } else {
+      setSearchResults([]);
+    }
+  };
 
   return (
     <nav
@@ -62,16 +147,29 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          <form className="d-flex position-relative" role="search">
             <input
               className="form-control me-2"
               type="search"
               placeholder="Search my Itinerary"
               aria-label="Search"
+              value={searchQuery}
+              onChange={handleSearchInput}
             />
-            <button className="btn custom-button" type="submit">
-              Search
-            </button>
+            
+            {searchResults.length > 0 && (
+              <ul className="list-group position-absolute w-100 mt-5">
+                {searchResults.map((result, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-action"
+                    onClick={() => handleClickResult(result)}
+                  >
+                    {result.title}
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
         </div>
       </div>
