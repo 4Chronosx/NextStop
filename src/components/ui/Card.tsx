@@ -42,14 +42,14 @@ const Card = ({ itinerary }: ItineraryProps) => {
         <div className="card-body">
           <div className="card-title-content-container">
             <h5 className="card-title">{itinerary.title}</h5>
-            <p className="card-text">
+          </div>
+          <div className="card-button-container">
+          <p className="card-text">
               Date: {itinerary.days[0].date} to {" "}
               {itinerary.days[itinerary.days.length - 1].date}
             </p>
-          </div>
-          <div className="card-button-container">
-            <button onClick={handleView} className="btn custom-button1">
-              view
+            <button onClick={handleView} className="custom-button1">
+              VIEW
             </button>
           </div>
         </div>

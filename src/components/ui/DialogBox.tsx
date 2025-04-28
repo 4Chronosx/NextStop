@@ -96,7 +96,7 @@ const DialogBox = ({ details, date }: DayItinerary) => {
   return (
     <React.Fragment>
       <button className="dialogView-button" onClick={handleClickOpen}>
-        View
+        VIEW
       </button>
       <Dialog
         fullScreen
@@ -115,7 +115,7 @@ const DialogBox = ({ details, date }: DayItinerary) => {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Activities of the Day {date}
+              <span className='banner-label1'>Activities of the Day</span> <span className='banner-label2'>{date}</span>
             </Typography>
           </Toolbar>
         </AppBar>

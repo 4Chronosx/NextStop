@@ -353,7 +353,7 @@ const CreateItinerary: React.FC = () => {
                           {activity.location} | ${activity.budget}
                         </p>
                         <div className="activity-actions">
-                          <button
+                          <button className="btn-activity-actions"
                             onClick={() => {
                               setEditingActivity(activity); // Set the activity to edit
                               setNewActivity({ ...activity }); // Populate form with activity details
@@ -361,7 +361,7 @@ const CreateItinerary: React.FC = () => {
                           >
                             Edit
                           </button>
-                          <button
+                          <button className="btn-activity-actions"
                             onClick={() => deleteActivity(activity)}
                           >
                             Delete

@@ -58,7 +58,12 @@ const Carousel = () => {
 
   useEffect(() => {
     const initDB = async () => {
-      const db = await openDB("MyDatabase", 6);
+      const db = await openDB("MyDatabase", 11, {
+        upgrade(db) {
+          // Create an object store for "data" with auto-incrementing keys
+          db.createObjectStore("data", { autoIncrement: true });
+        },
+      });
       const count = await db.count("data");
       if (count > 0) {
         const allData = await db.getAll("data");
