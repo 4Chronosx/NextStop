@@ -1,8 +1,7 @@
 import "./DayCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import DialogBox from "./DialogBox";
-
 
 interface ActivityDetail {
   date: string;
@@ -27,25 +26,28 @@ interface Prop {
   dayNum: number;
 }
 
-
-const DayCard = ({ dayItinerary, dayNum } : DayItineraryProp&Prop) => {
+const DayCard = ({ dayItinerary, dayNum }: DayItineraryProp & Prop) => {
   return (
     <div className="dayCard-container">
       <div className="dayCard-left">
-        <div className="icon">
-          <FontAwesomeIcon icon={faCalendar as any} size="3x" />
-        </div>
         <div className="text-container">
           <p className="day-title">Day {dayNum}</p>
-          <p className="preview-detail">{dayItinerary.details.length} activities</p>
+          <p className="preview-detail">
+            {dayItinerary.details.length} activities
+          </p>
         </div>
       </div>
       <div className="dayCard-right">
+        <div className="icon">
+          <FontAwesomeIcon icon={faCalendarDays as any} size="4x" style={{color:"#24265d"}} />
+        </div>
         <div className="dayCard-button-container">
-          <DialogBox date={dayItinerary.date} details={dayItinerary.details}></DialogBox>
+          <DialogBox
+            date={dayItinerary.date}
+            details={dayItinerary.details}
+          ></DialogBox>
         </div>
       </div>
-
     </div>
   );
 };

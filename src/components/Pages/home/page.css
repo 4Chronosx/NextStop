@@ -1,11 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/genty-demo');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
 .bg-img {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("src/assets/map.jpg");
+    url("src/assets/home-page-bg.png");
   background-size: cover; /* Ensures the image covers the entire header area */
   background-position: center center; /* Centers the image within the header */
   background-repeat: no-repeat; /* Prevents image from repeating */
   padding-top: 6rem; /* Adjust padding as needed to create spacing */
   padding-bottom: 6rem;
+  opacity: 0.9;
 }
 
 .custom-button1 {
@@ -23,4 +27,35 @@
     width: 20rem;
     background-color: #00adef;
     border: 1px solid black; 
+}
+
+.headliner {
+  color: white;
+  font-weight:bolder !important;
+  text-shadow: 2px 2px 5px black !important;
+}
+
+.brandname-home {
+  font-family: 'Genty Demo', 'Lucida Sans', sans-serif !important;
+  font-size: larger;
+  color: #ff986c
+}
+
+.lead {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: bold !important;
+  font-size:xx-large !important;
+  color: #fff;
+  text-shadow: 2px 2px 5px black !important;
+}
+
+.guide-detail {
+  color: #fff;
+  text-shadow: 2px 2px 5px black !important;
+}
+
+.itinerary-section-title {
+  color: #24265d !important;
+  font-weight: bold !important;
+  text-shadow: 1px 1px 2px black !important;
 }

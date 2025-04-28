@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   background-color: lightblue;
   margin: 0;
   padding: 0;
@@ -12,80 +13,84 @@ html, body {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-
 }
 
 .view-header-container {
-text-align: center;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  width: 100%;
+  height: 10rem;
+  background-color: #2c3892;
 }
 
 .view-dayCard-container {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusts the number of cards per row */
-gap: 1rem; /* Uniform gap for both horizontal and vertical spacing */
-padding: 2rem;
-box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(220px, 1fr)
+  ); /* Adjusts the number of cards per row */
+  gap: 1rem; /* Uniform gap for both horizontal and vertical spacing */
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-
 .view-back-button {
-display: inline-block;
-margin-top: 1rem;
-padding: 0.5rem 3rem;
-border-radius: 2rem;
-color: #fff;
-font-size: 1rem;
-letter-spacing: 0.15rem;
-transition: all 0.3s;
-position: relative;
-overflow: hidden;
-z-index: 1;
-border: none;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 3rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
 }
 
 .view-back-button:after {
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: #0cf;
-border-radius: 2rem;
-z-index: -2;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0cf;
+  border-radius: 2rem;
+  z-index: -2;
 }
 
 .view-back-button:before {
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 0%;
-height: 100%;
-background-color: #008fb3;
-transition: all 0.3s;
-border-radius: 2rem;
-z-index: -1;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #008fb3;
+  transition: all 0.3s;
+  border-radius: 2rem;
+  z-index: -1;
 }
 
 .view-back-button:hover {
-color: #fff;
+  color: #fff;
 }
 
 .view-back-button:hover:before {
-width: 100%;
+  width: 100%;
 }
 
 .view-back-button-container {
-text-align: center;
+  text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
+.view-header-title {
+  color: white;
+  font-weight: bolder;
+  text-shadow: 2px 2px 5px black !important;
+  font-size: 4rem;
+  text-align: center;
+}

@@ -1,3 +1,9 @@
+@import url('https://fonts.cdnfonts.com/css/genty-demo');
+
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 .chat-container {
   position: relative; /* Create a context for sticky positioning */
   display: flex;
@@ -5,6 +11,66 @@
   height: 100%; /* Ensure the container spans the full height */
   overflow: hidden;
 }
+
+.cs-conversation-header, .cs-conversation-header__info, .cs-conversation-header__user-name {
+  background-color: #ff986c !important; /* Replace with your desired color */
+  color: white !important; /* Optional: Adjust text color for better visibility */
+
+}
+
+
+.cs-conversation-header__user-name {
+  font-family: 'Genty Demo', sans-serif;
+  text-shadow: 2px 2px 5px gray;
+  font-size:larger;
+}
+
+.cs-conversation-header__info {
+  color: #24265d !important;
+  margin: -1px !important;
+}
+
+.cs-message__content {
+  background-color: #1087cf !important;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.cs-message__html-content {
+  background-color: #1087cf !important;
+  color: white !important;
+}
+
+.cs-message-input {
+  background-color: #ff986c !important;
+}
+
+.cs-button--attachment {
+  color: #ff986c  !important;
+}
+
+.cs-button--send {
+  color:#1087cf !important;
+  opacity: 1 !important;
+}
+
+.cs-message-list {
+  background-color: #d8dbd4 !important;
+}
+
+.cs-message-input__content-editor-wrapper, .cs-message-input__content-editor {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: #fff !important;
+  color: #acadab !important;
+  font-weight: none !important;
+  font-size:small;
+}
+
+.cs-typing-indicator {
+  background-color: #d8dbd4 !important;
+  color: #1087cf !important;
+}
+
+
 
 .create-button, .view-itinerary-button {
     display: inline-block;

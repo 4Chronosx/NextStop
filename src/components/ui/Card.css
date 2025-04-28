@@ -1,17 +1,22 @@
 .custom-button1 {
-  background-color: #00adef !important;
+  background-color: #ff986c !important;
   color: white !important;
+  border-radius: 20px !important;
+  width: 100px;
+  font-weight: bold !important;
+  border: none;
 }
 
 .custom-button1:hover {
-  background-color: #0497d1 !important;
+  background-color: #f0a889 !important;
   color: white !important;
 }
 
-
 .card {
-width: 20rem !important;
-height: 10rem !important;
+  width: 20rem !important;
+  height: 10rem !important;
+  border-radius: 20px !important;
+  background-color: #6eb3c7 !important;
 }
 
 .card-img-top {
@@ -19,10 +24,40 @@ height: 10rem !important;
   height: auto;
 }
 
-
-
 .card-body {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-text {
+  font-weight: bold !important;
+  color: #f4680e;
+  font-size: smaller;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.card-title {
+  color: white !important;
+  font-weight: bolder;
+  text-shadow: 2px 2px 5px black !important;
+  font-size: x-large;
+  text-align: center;
+}
+
+
+.card-title-content-container {
+  width: 100%;
+  height: 60%;
+
+}
+
+.card-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 40%;
+
 }

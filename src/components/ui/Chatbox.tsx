@@ -84,7 +84,7 @@ const Chatbox = () => {
       {
         date: " ",
         details: [
-          { 
+          {
             date: " ",
             title: " ",
             type: " ",
@@ -135,7 +135,7 @@ const Chatbox = () => {
   useEffect(() => {
     // Initialize IndexedDB on component mount
     const initDB = async () => {
-      const db = await openDB("MyDatabase", 6, {
+      const db = await openDB("MyDatabase", 11, {
         upgrade(db) {
           // Create an object store for "data" with auto-incrementing keys
           db.createObjectStore("data", { autoIncrement: true });
@@ -143,14 +143,13 @@ const Chatbox = () => {
       });
       console.log("Database initialized:", db.objectStoreNames);
     };
-    
 
     initDB();
   }, []);
 
   const handleSave = async () => {
     setisCreateDisabled(false);
-    const db = await openDB("MyDatabase", 6);
+    const db = await openDB("MyDatabase", 11);
     await db.add("data", data);
     getDB();
     setisCreateDisabled(true);
@@ -159,12 +158,12 @@ const Chatbox = () => {
 
   const handleView = () => {
     navigate("/view-itinerary", {
-      state: { itinerary: data } // Pass the itinerary data as state
+      state: { itinerary: data }, // Pass the itinerary data as state
     });
   };
 
   const getDB = async () => {
-    const db = await openDB("MyDatabase", 6);
+    const db = await openDB("MyDatabase", 11);
 
     // Fetch all data from the object store
     const allData = await db.getAll("data");
@@ -301,13 +300,11 @@ const Chatbox = () => {
         *"Please complete all the required questions to generate a full itinerary."*
       
       - If there are gaps in activities or missing details, automatically fill them with relevant suggestions based on the user's preferences and context.
-      `
+      `,
     };
-    
-    
 
     const apiRequestBody = {
-      model: "gpt-4o-mini",
+      model: "gpt-4.1",
       messages: [systemMessage, ...apiMessages],
     };
 
@@ -366,13 +363,10 @@ const Chatbox = () => {
         <MainContainer>
           <ChatContainer>
             <ConversationHeader>
-              <Avatar
-                name="Emily"
-                src="https://chatscope.io/storybook/react/assets/emily-xzL8sDL2.svg"
-              />
+              <Avatar src="src\assets\avatar.png" />
               <ConversationHeader.Content
                 info="Active now"
-                userName="WanderMap AI"
+                userName="NextStop AI"
               />
             </ConversationHeader>
             <MessageList
@@ -383,10 +377,6 @@ const Chatbox = () => {
               }
             >
               {messages.map((message, index) => {
-                const avatarSrc =
-                  message.sender === "user"
-                    ? "https://chatscope.io/storybook/react/assets/joe-v8Vy3KOS.svg"
-                    : "https://chatscope.io/storybook/react/assets/emily-xzL8sDL2.svg";
                 return (
                   <Message
                     key={index}
@@ -398,7 +388,9 @@ const Chatbox = () => {
                       sentTime: message.sentTime,
                     }}
                   >
-                    <Avatar name={message.sender} src={avatarSrc}></Avatar>
+                    {message.sender !== "user" && (
+                      <Avatar name="sender" src="src/assets/avatar.png" />
+                    )}
                   </Message>
                 );
               })}
@@ -406,24 +398,23 @@ const Chatbox = () => {
             <MessageInput placeholder="Type message here" onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
-        
+
         <div className="chatbox-button-container">
-        <button
-          className="create-button"
-          disabled={isCreateDisabled}
-          onClick={handleSave}
-        >
-          Create
-        </button>
-        <button
-          className="view-itinerary-button"
-          disabled={isViewDisabled}
-          onClick={handleView}
-        >
-          View Itinerary
-        </button>
-        </div> 
-        
+          <button
+            className="create-button"
+            disabled={isCreateDisabled}
+            onClick={handleSave}
+          >
+            Create
+          </button>
+          <button
+            className="view-itinerary-button"
+            disabled={isViewDisabled}
+            onClick={handleView}
+          >
+            View Itinerary
+          </button>
+        </div>
       </div>
     </>
   );

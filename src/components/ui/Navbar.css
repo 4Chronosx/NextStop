@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/genty-demo');
+
 .custom-button {
     border-color: #00adef !important;
     color: #00adef !important;
@@ -6,5 +8,50 @@
 .custom-button:hover {
     background-color: #00adef !important;
     color: white !important;
+}
+
+
+.brandname {
+    font-family: 'Genty Demo', sans-serif;
+    font-size:xx-large;
+    margin-top: 0.5rem;
+    color: #24265d;
+    margin-right: 1rem;
+}
+
+.container-fluid {
+    background-color: #b7d8de;
+}
+
+.navbar {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.search {
+    margin: 0.5rem 0!important;
+    background-color: #6eb3c7 !important;
+    color: #d8dbd4 !important;
+}
+
+.search::placeholder {
+    color: #d8dbd4 !important;
+}
+
+
+.nav-link {
+    color: #ff986c !important;
+    font-weight: bold !important;
+}
+
+.nav-link:hover {
+    color: #d39b83 !important;
+}
+.active {
+    color: #f86b2e !important;
+}
+
+.search-list {
+    left: -2%;
 }
 

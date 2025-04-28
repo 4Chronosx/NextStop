@@ -1,10 +1,12 @@
 .dialogView-button {
   border: none;
-  border-radius: 20px;
+  border-radius: 8px;
   width: 100%;
-  border: 1px solid black;
   margin: 0;
   padding: 0 0 0.15rem;
+  background-color: #6eb3c7;
+  color: #fff;
+  font-weight: bold;
 }
 
 .maps-container {
@@ -13,4 +15,17 @@
 	background-color: grey;
 	margin: 2rem auto;
 	text-align: center;
+}
+
+.banner-label1 {
+  color: #efc02b !important;
+  font-weight: bolder !important;
+  font-size: xx-large;
+  text-shadow: 1px 1px 2px black;
+}
+
+.banner-label2 {
+  font-weight: bold !important;
+  font-size: xx-large;
+  text-shadow: 1px 1px 2px black;
 }
