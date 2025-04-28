@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
 :root {
   --palette-color1: #001c30;
   --palette-color2: #176b87;
@@ -30,7 +32,8 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family:'Poppins', sans-serif !important;
+  font-weight: bold !important;
   line-height: 1.6;
   background-color: #f8f9fa; /* Bootstrap's default light gray */
   color: #212529; /* Bootstrap's default text color */

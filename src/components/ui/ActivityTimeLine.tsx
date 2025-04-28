@@ -11,6 +11,8 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import CommuteIcon from '@mui/icons-material/Commute';
+import './ActivityTimeLine.css';
+
 
 interface ActivityDetail {
   date: string;
@@ -39,11 +41,13 @@ const getIconForActivityType = (type: string) => {
     case "Sightseeing":
       return <LandscapeIcon />;
     case "Leisure":
-      return <ShoppingCartIcon />;
+      return ;
     case "Outdoor Adventure":
       return <DirectionsRunIcon />;
     case "Travel":
       return <CommuteIcon />;
+    case "Shopping":
+      return <ShoppingCartIcon />;
     default:
       return null;
   }
@@ -65,7 +69,7 @@ const ActivityTimeline = ({ details, date }: DayItinerary) => {
             sx={{ m: 'auto 0' }}
             align={index % 2 === 0 ? 'right' : 'left'}
             variant="body2"
-            color="text.secondary"
+            color="#3871c1"
           >
             {activity.timeSlot}
           </TimelineOppositeContent>
@@ -77,20 +81,20 @@ const ActivityTimeline = ({ details, date }: DayItinerary) => {
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent sx={{ py: '12px', px: 2 }}>
-            <Typography variant="h6" component="span">
+            <Typography variant="h6" component="span" className='activity-title'>
               {activity.title}
             </Typography>
-            <Typography
+            <Typography className="activity-subdetails"
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
               {activity.type}, {activity.duration}
             </Typography>
-            <Typography
+            <Typography className="activity-subdetails"
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
               Location: {activity.location}
             </Typography>
-            <Typography
+            <Typography className="activity-subdetails"
               sx={{ fontSize: '0.875rem', color: 'gray', mt: 0.5 }}
             >
               Budget: {activity.budget}

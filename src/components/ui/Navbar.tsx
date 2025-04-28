@@ -57,7 +57,12 @@ const Navbar = () => {
 
   useEffect(() => {
     const initDB = async () => {
-      const db = await openDB("MyDatabase", 6);
+      const db = await openDB("MyDatabase", 11, {
+        upgrade(db) {
+          // Create an object store for "data" with auto-incrementing keys
+          db.createObjectStore("data", { autoIncrement: true });
+        },
+      });
       const count = await db.count("data");
       if (count > 0) {
         const allData = await db.getAll("data");
@@ -91,17 +96,18 @@ const Navbar = () => {
 
   return (
     <nav
-      className="navbar sticky-top navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body"
-      data-bs-theme="dark"
+      className="navbar sticky-top navbar-expand-lg bg-body-tertiary border-body"
+      
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img
             src="src/assets/Logo.png"
             alt="Logo"
-            style={{ height: "2rem" }}
+            style={{ height: "3rem" }}
           />
         </Link>
+        <span className="brandname">NextStop</span>
         <button
           className="navbar-toggler"
           type="button"
@@ -149,7 +155,7 @@ const Navbar = () => {
           </ul>
           <form className="d-flex position-relative" role="search">
             <input
-              className="form-control me-2"
+              className="form-control me-2 search"
               type="search"
               placeholder="Search my Itinerary"
               aria-label="Search"
@@ -158,7 +164,7 @@ const Navbar = () => {
             />
             
             {searchResults.length > 0 && (
-              <ul className="list-group position-absolute w-100 mt-5">
+              <ul className="list-group position-absolute w-100 mt-5 search-list">
                 {searchResults.map((result, index) => (
                   <li
                     key={index}

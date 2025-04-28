@@ -1,0 +1,11 @@
+.activity-title {
+    color: #f68712 !important;
+    font-weight: bolder;
+    font-size:x-large;
+    text-shadow: 1px 1px 2px grey;
+}
+
+
+.activity-subdetails {
+    color: #2c3892 !important;
+}

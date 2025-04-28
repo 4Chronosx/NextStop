@@ -38,7 +38,7 @@ const View = ({ itinerary }: ItineraryProp) => {
     <>
       <div className="my-container">
         <div className="view-header-container">
-          <h1>{itinerary.title}</h1>
+          <h1 className="view-header-title">{itinerary.title}</h1>
         </div>
         <div className="view-dayCard-container">
           {itinerary.days.map((day, index) => {
