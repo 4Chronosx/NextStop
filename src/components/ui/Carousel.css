@@ -6,6 +6,11 @@
   align-items: center !important;
 }
 
+.empty-state-carousel {
+  text-align: center;
+  padding: 3rem 2rem;
+  width: 100%;
+}
 
 
 

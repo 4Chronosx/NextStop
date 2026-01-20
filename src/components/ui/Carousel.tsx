@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { openDB } from "idb";
 import Card from "./Card"; // Import your Card component
 import "./Carousel.css";
 
@@ -23,30 +22,8 @@ interface Itinerary {
   days: DayItinerary[];
 }
 
-const defaultItinerary: Itinerary[] = [
-  {
-    title: "myItinerary",
-    days: [
-      {
-        date: "Day 1",
-        details: [
-          {
-            date: "Day 1",
-            title: "Activity 1",
-            type: "Type 1",
-            duration: "2 hours",
-            timeSlot: "Morning",
-            budget: "$100",
-            location: "Location 1",
-          },
-        ],
-      },
-    ],
-  },
-];
-
 const Carousel = () => {
-  const [data, setData] = useState<Itinerary[]>(defaultItinerary);
+  const [data, setData] = useState<Itinerary[]>([]);
 
   const chunkData = (data: Itinerary[]) => {
     const chunks = [];
@@ -57,59 +34,90 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    const initDB = async () => {
-      const db = await openDB("MyDatabase", 11, {
-        upgrade(db) {
-          // Create an object store for "data" with auto-incrementing keys
-          db.createObjectStore("data", { autoIncrement: true });
-        },
-      });
-      const count = await db.count("data");
-      if (count > 0) {
-        const allData = await db.getAll("data");
-        setData(allData); // Ensure consistent display order
+    // Load itineraries from localStorage
+    const loadItineraries = () => {
+      const saved = localStorage.getItem('itineraries');
+      if (saved) {
+        try {
+          const itineraries = JSON.parse(saved);
+          setData(itineraries);
+        } catch (error) {
+          console.error('Failed to load itineraries:', error);
+          setData([]);
+        }
       }
     };
 
-    initDB();
+    loadItineraries();
+
+    // Listen for storage events to update when itineraries change
+    const handleStorageChange = () => {
+      loadItineraries();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom event from same tab
+    window.addEventListener('itinerariesUpdated', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('itinerariesUpdated', handleStorageChange);
+    };
   }, []);
 
   const chunkedData = chunkData(data);
 
   return (
     <div id="carouselExampleFade" className="carousel slide carousel-fade">
-      <div className="carousel-inner">
-        {chunkedData.map((chunk, index) => (
-          <div
-            className={`carousel-item ${index === 0 ? "active" : ""}`}
-            key={`slide-${index}`}
-          >
-            {chunk.map((itinerary, idx) => (
-              <div key={`card-${index}-${idx}`} className="mx-2">
-                <Card itinerary={itinerary} />
+      {data.length === 0 ? (
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <div className="empty-state-carousel">
+              <svg className="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: '64px', height: '64px', margin: '0 auto 1rem', color: '#d1d5db' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+              </svg>
+              <p style={{ fontSize: '1.125rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem' }}>No itineraries yet</p>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>Start planning your adventures in the Create Itinerary page!</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="carousel-inner">
+            {chunkedData.map((chunk, index) => (
+              <div
+                className={`carousel-item ${index === 0 ? "active" : ""}`}
+                key={`slide-${index}`}
+              >
+                {chunk.map((itinerary, idx) => (
+                  <div key={`card-${index}-${idx}`} className="mx-2">
+                    <Card itinerary={itinerary} />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        ))}
-      </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="prev"
+          >
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="next"
+          >
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </>
+      )}
     </div>
   );
 };
