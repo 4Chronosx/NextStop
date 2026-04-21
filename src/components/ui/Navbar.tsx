@@ -81,7 +81,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img
-            src="src/assets/Logo.png"
+            src="logo.png"
             alt="Logo"
             style={{ height: "3rem" }}
           />
