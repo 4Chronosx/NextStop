@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { GoogleMap, MarkerF, DirectionsRenderer } from "@react-google-maps/api";
 import { MapOptions } from "../../api/googleMaps/mapTypes";
 import { formatRouteDetails } from "../../api/googleMaps/directionsUtils";
+import Dialog from "../ui/Dialog";
 import "./maps.css";
 
 interface Location {
@@ -45,6 +46,8 @@ const Map = ({ locations }: { locations: Location[] }) => {
     useState<google.maps.DirectionsResult | null>(null);
   const [showRoute, setShowRoute] = useState<boolean>(false);
   const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [travelMode, setTravelMode] = useState<google.maps.TravelMode>(
     google.maps.TravelMode.DRIVING
   );
@@ -80,9 +83,8 @@ const Map = ({ locations }: { locations: Location[] }) => {
           setDirections(result);
         } else {
           console.error("Error fetching directions:", status);
-          alert(
-            "Failed to fetch route. Please check your input and try again."
-          );
+          setAlertMessage("Failed to fetch route. Please check your input and try again.");
+          setAlertOpen(true);
         }
       }
     );
@@ -221,6 +223,12 @@ const Map = ({ locations }: { locations: Location[] }) => {
           </p>
         </div>
       )}
+      <Dialog
+        isOpen={alertOpen}
+        type="alert"
+        message={alertMessage}
+        onClose={() => setAlertOpen(false)}
+      />
     </div>
   );
 };

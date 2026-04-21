@@ -1,6 +1,5 @@
 import "./Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { openDB } from "idb";
 import { useEffect, useState } from "react";
 
 interface ActivityDetail {
@@ -23,54 +22,34 @@ interface Itinerary {
   days: DayItinerary[];
 }
 
-const defaultItinerary: Itinerary[] = [
-  {
-    title: "myItinerary",
-    days: [
-      {
-        date: "Day 1",
-        details: [
-          {
-            date: "Day 1",
-            title: "Activity 1",
-            type: "Type 1",
-            duration: "2 hours",
-            timeSlot: "Morning",
-            budget: "$100",
-            location: "Location 1",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-
-
 const Navbar = () => {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
   const navigate = useNavigate();
-  const [data, setData] = useState<Itinerary[]>(defaultItinerary);
+  const [data, setData] = useState<Itinerary[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] =
-    useState<Itinerary[]>([]);
+  const [searchResults, setSearchResults] = useState<Itinerary[]>([]);
 
   useEffect(() => {
-    const initDB = async () => {
-      const db = await openDB("MyDatabase", 11, {
-        upgrade(db) {
-          // Create an object store for "data" with auto-incrementing keys
-          db.createObjectStore("data", { autoIncrement: true });
-        },
-      });
-      const count = await db.count("data");
-      if (count > 0) {
-        const allData = await db.getAll("data");
-        setData(allData); // Ensure consistent display order
+    const loadItineraries = () => {
+      const saved = localStorage.getItem("itineraries");
+      if (saved) {
+        try {
+          setData(JSON.parse(saved));
+        } catch {
+          setData([]);
+        }
+      } else {
+        setData([]);
       }
     };
 
-    initDB();
+    loadItineraries();
+    window.addEventListener("storage", loadItineraries);
+    window.addEventListener("itinerariesUpdated", loadItineraries);
+    return () => {
+      window.removeEventListener("storage", loadItineraries);
+      window.removeEventListener("itinerariesUpdated", loadItineraries);
+    };
   }, []);
 
   const handleClickResult = (itinerary: Itinerary) => {
@@ -139,7 +118,7 @@ const Navbar = () => {
                 }`}
                 to="/create-itinerary"
               >
-                Create Itinerary
+                My Itineraries
               </Link>
             </li>
             <li className="nav-item">

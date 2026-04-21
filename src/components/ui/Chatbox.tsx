@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { openDB } from "idb";
 import "./Chatbox.css";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
@@ -132,44 +131,20 @@ const Chatbox = () => {
     },
   ]);
 
-  useEffect(() => {
-    // Initialize IndexedDB on component mount
-    const initDB = async () => {
-      const db = await openDB("MyDatabase", 11, {
-        upgrade(db) {
-          // Create an object store for "data" with auto-incrementing keys
-          db.createObjectStore("data", { autoIncrement: true });
-        },
-      });
-      console.log("Database initialized:", db.objectStoreNames);
-    };
-
-    initDB();
-  }, []);
-
-  const handleSave = async () => {
-    setisCreateDisabled(false);
-    const db = await openDB("MyDatabase", 11);
-    await db.add("data", data);
-    getDB();
+  const handleSave = () => {
     setisCreateDisabled(true);
+    const existing = localStorage.getItem('itineraries');
+    const itineraries = existing ? JSON.parse(existing) : [];
+    itineraries.push(data);
+    localStorage.setItem('itineraries', JSON.stringify(itineraries));
+    window.dispatchEvent(new Event('itinerariesUpdated'));
     setisViewDisabled(false);
   };
 
   const handleView = () => {
     navigate("/view-itinerary", {
-      state: { itinerary: data }, // Pass the itinerary data as state
+      state: { itinerary: data },
     });
-  };
-
-  const getDB = async () => {
-    const db = await openDB("MyDatabase", 11);
-
-    // Fetch all data from the object store
-    const allData = await db.getAll("data");
-
-    // Log or display the data
-    console.log(allData);
   };
 
   const handleSend = async (message: string) => {

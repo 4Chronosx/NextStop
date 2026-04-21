@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Card from "./Card"; // Import your Card component
+import Card from "./Card";
 import "./Carousel.css";
 
 interface ActivityDetail {
@@ -34,7 +34,6 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    // Load itineraries from localStorage
     const loadItineraries = () => {
       const saved = localStorage.getItem('itineraries');
       if (saved) {
@@ -50,14 +49,8 @@ const Carousel = () => {
 
     loadItineraries();
 
-    // Listen for storage events to update when itineraries change
-    const handleStorageChange = () => {
-      loadItineraries();
-    };
-
+    const handleStorageChange = () => loadItineraries();
     window.addEventListener('storage', handleStorageChange);
-    
-    // Also listen for custom event from same tab
     window.addEventListener('itinerariesUpdated', handleStorageChange);
 
     return () => {
@@ -65,6 +58,7 @@ const Carousel = () => {
       window.removeEventListener('itinerariesUpdated', handleStorageChange);
     };
   }, []);
+
 
   const chunkedData = chunkData(data);
 
@@ -85,16 +79,18 @@ const Carousel = () => {
       ) : (
         <>
           <div className="carousel-inner">
-            {chunkedData.map((chunk, index) => (
+            {chunkedData.map((chunk, chunkIndex) => (
               <div
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
-                key={`slide-${index}`}
+                className={`carousel-item ${chunkIndex === 0 ? "active" : ""}`}
+                key={`slide-${chunkIndex}`}
               >
-                {chunk.map((itinerary, idx) => (
-                  <div key={`card-${index}-${idx}`} className="mx-2">
-                    <Card itinerary={itinerary} />
-                  </div>
-                ))}
+                {chunk.map((itinerary, idx) => {
+                  return (
+                    <div key={`card-${chunkIndex}-${idx}`} className="mx-2">
+                      <Card itinerary={itinerary} />
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
