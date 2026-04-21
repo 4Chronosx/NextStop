@@ -3,7 +3,7 @@
 
 .bg-img {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("src/assets/home-page-bg.png");
+    url("/home-page-bg.png");
   background-size: cover; /* Ensures the image covers the entire header area */
   background-position: center center; /* Centers the image within the header */
   background-repeat: no-repeat; /* Prevents image from repeating */

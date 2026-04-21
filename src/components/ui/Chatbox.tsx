@@ -338,7 +338,7 @@ const Chatbox = () => {
         <MainContainer>
           <ChatContainer>
             <ConversationHeader>
-              <Avatar src="src\assets\avatar.png" />
+              <Avatar src="/avatar.png" />
               <ConversationHeader.Content
                 info="Active now"
                 userName="NextStop AI"
@@ -364,7 +364,7 @@ const Chatbox = () => {
                     }}
                   >
                     {message.sender !== "user" && (
-                      <Avatar name="sender" src="src/assets/avatar.png" />
+                      <Avatar name="sender" src="/avatar.png" />
                     )}
                   </Message>
                 );
