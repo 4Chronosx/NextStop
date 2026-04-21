@@ -60,7 +60,7 @@ const getDotColor = (index: number): "primary" | "secondary" | undefined => {
   return "secondary";
 };
 
-const ActivityTimeline = ({ details, date }: DayItinerary) => {
+const ActivityTimeline = ({ details }: DayItinerary) => {
   return (
     <Timeline position="alternate">
       {details.map((activity, index) => (

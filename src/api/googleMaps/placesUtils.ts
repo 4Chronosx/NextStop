@@ -1,5 +1,3 @@
-import { getGeocode, getLatLng } from "use-places-autocomplete";
-
 export const getCoordinatesFromAddress = async (address: string): Promise<{ lat: number; lng: number }> => {
   if (!window.google || !window.google.maps) {
     throw new Error("Google Maps JavaScript API not loaded.");
